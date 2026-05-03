@@ -260,6 +260,22 @@
         font-size: 1.25rem;
       }
 
+      .headline-link,
+      .story-link {
+        color: inherit;
+        text-decoration-color: transparent;
+        text-decoration-thickness: 0.08em;
+        transition:
+          color 160ms ease,
+          text-decoration-color 160ms ease;
+      }
+
+      .headline-link:hover,
+      .story-link:hover {
+        color: var(--red);
+        text-decoration-color: currentColor;
+      }
+
       .dek {
         margin: 0;
         color: var(--muted);
@@ -553,7 +569,11 @@
         <section id="headline" class="lead-grid" aria-labelledby="headline-title">
           <article class="hero-story">
             <span class="label">头版独家</span>
-            <h2 id="headline-title">小黄大王宣布今日心情整体向好，臣民生活信心指数大幅上扬</h2>
+            <h2 id="headline-title">
+              <a class="headline-link" href="article.html?story=mood-index">
+                小黄大王宣布今日心情整体向好，臣民生活信心指数大幅上扬
+              </a>
+            </h2>
             <p class="dek">
               记者从多个沙发、餐桌和路过的杯子处获悉，小黄大王今日状态稳定，
               笑容具有罕见的战略安抚意义。
@@ -573,15 +593,15 @@
           <aside class="side-briefs" aria-labelledby="briefs-title">
             <h2 id="briefs-title" class="label">快讯简报</h2>
             <article class="brief">
-              <h3>皇家早餐完成历史性落地</h3>
+              <h3><a class="story-link" href="article.html?story=breakfast">皇家早餐完成历史性落地</a></h3>
               <p>相关盘子表示，现场秩序良好，咀嚼节奏具有里程碑意义。</p>
             </article>
             <article class="brief">
-              <h3>御用拖鞋疑似获得高度关注</h3>
+              <h3><a class="story-link" href="article.html?story=slippers">御用拖鞋疑似获得高度关注</a></h3>
               <p>小黄大王看了它一眼。专家称，这一眼“不简单”。</p>
             </article>
             <article class="brief">
-              <h3>天气部门发布崇拜指数</h3>
+              <h3><a class="story-link" href="article.html?story=admiration-index">天气部门发布崇拜指数</a></h3>
               <p>今日崇拜指数为 99.9，剩余 0.1 留给明天继续进步。</p>
             </article>
           </aside>
@@ -596,17 +616,17 @@
           <div class="news-grid">
             <article class="card">
               <p class="kicker">政治</p>
-              <h3>小黄大王发表重要讲话：今天也要好好吃饭</h3>
+              <h3><a class="story-link" href="article.html?story=speech">小黄大王发表重要讲话：今天也要好好吃饭</a></h3>
               <p>讲话全文虽然只有一句，但被各界解读出十八层温柔含义。</p>
             </article>
             <article class="card">
               <p class="kicker">文化</p>
-              <h3>大王随口哼歌，民间音乐史或将改写</h3>
+              <h3><a class="story-link" href="article.html?story=humming">大王随口哼歌，民间音乐史或将改写</a></h3>
               <p>多名听众表示旋律已经占领脑内广播，预计循环播放到睡前。</p>
             </article>
             <article class="card">
               <p class="kicker">经济</p>
-              <h3>奶茶市场因大王一句“想喝”进入繁荣周期</h3>
+              <h3><a class="story-link" href="article.html?story=milk-tea">奶茶市场因大王一句“想喝”进入繁荣周期</a></h3>
               <p>附近商圈信心恢复，珍珠供应链连夜召开圆桌会议。</p>
             </article>
           </div>
@@ -621,17 +641,17 @@
           <div class="news-grid">
             <article class="card">
               <p class="kicker">社会</p>
-              <h3>被大王夸奖一句后，某人原地自信三小时</h3>
+              <h3><a class="story-link" href="article.html?story=praise-effect">被大王夸奖一句后，某人原地自信三小时</a></h3>
               <p>心理学界认为，这是“高浓度小黄肯定效应”的典型案例。</p>
             </article>
             <article class="card">
               <p class="kicker">体育</p>
-              <h3>小黄大王伸懒腰动作优雅，刷新本报审美纪录</h3>
+              <h3><a class="story-link" href="article.html?story=stretch">小黄大王伸懒腰动作优雅，刷新本报审美纪录</a></h3>
               <p>裁判组一致给出满分，并追加“可爱到犯规”特别评语。</p>
             </article>
             <article class="card">
               <p class="kicker">国际</p>
-              <h3>全球目光聚焦小黄大王是否回消息</h3>
+              <h3><a class="story-link" href="article.html?story=reply-watch">全球目光聚焦小黄大王是否回消息</a></h3>
               <p>本报将持续关注，并在收到“哈哈哈哈”后第一时间发布号外。</p>
             </article>
           </div>
@@ -640,7 +660,11 @@
         <section class="two-column" aria-label="社论与时间线">
           <article id="editorial" class="editorial">
             <span class="label">本报社论</span>
-            <h2>必须承认：小黄大王的可爱具有长期主义价值</h2>
+            <h2>
+              <a class="headline-link" href="article.html?story=editorial">
+                必须承认：小黄大王的可爱具有长期主义价值
+              </a>
+            </h2>
             <p>
               本报认为，小黄大王并非偶然可爱，而是在长期生活实践中形成了稳定、
               可持续、可复用的可爱能力。面对这种局面，我们唯一成熟的回应，
@@ -668,7 +692,7 @@
 
           <article class="timeline">
             <span class="label">今日大事记</span>
-            <h2>小黄大王日程表</h2>
+            <h2><a class="headline-link" href="article.html?story=schedule">小黄大王日程表</a></h2>
             <ol>
               <li><strong>09:00</strong> 大王醒来，世界恢复正常运转。</li>
               <li><strong>12:30</strong> 大王吃饭，本报称赞其筷子调度能力。</li>
@@ -680,7 +704,11 @@
 
         <section id="correction" class="correction" aria-labelledby="correction-title">
           <span class="label">郑重更正</span>
-          <h2 id="correction-title">关于昨日“小黄大王可爱程度已达上限”的报道</h2>
+          <h2 id="correction-title">
+            <a class="headline-link" href="article.html?story=correction">
+              关于昨日“小黄大王可爱程度已达上限”的报道
+            </a>
+          </h2>
           <p>
             经核查，该表述不严谨。小黄大王今日再次突破上限，因此本报决定撤回
             “已达上限”说法，改为“上限正在被持续重新定义”。特此更正，并向读者
