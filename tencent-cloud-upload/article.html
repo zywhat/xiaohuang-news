@@ -1,0 +1,672 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>小黄大王日报 · 新闻全文</title>
+    <meta name="description" content="小黄大王日报新闻全文页面。">
+    <style>
+      :root {
+        color-scheme: light;
+        --paper: #fbf7ef;
+        --ink: #1f1d1a;
+        --muted: #5f5a50;
+        --rule: #cbc0ad;
+        --panel: #fffdf8;
+        --gold: #b7791f;
+        --red: #9b2226;
+        --green: #0f766e;
+        --focus: #2563eb;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        background:
+          linear-gradient(rgba(255, 255, 255, 0.52), rgba(255, 255, 255, 0.52)),
+          repeating-linear-gradient(
+            0deg,
+            var(--paper),
+            var(--paper) 18px,
+            #f4ead9 19px
+          );
+        color: var(--ink);
+        font-family:
+          Georgia,
+          "Times New Roman",
+          "Noto Serif SC",
+          "Songti SC",
+          serif;
+        line-height: 1.72;
+      }
+
+      a {
+        color: var(--red);
+        text-underline-offset: 0.18em;
+      }
+
+      a:focus-visible {
+        outline: 3px solid var(--focus);
+        outline-offset: 4px;
+      }
+
+      .skip-link {
+        position: absolute;
+        left: 1rem;
+        top: 1rem;
+        z-index: 20;
+        transform: translateY(-160%);
+        background: var(--ink);
+        color: #ffffff;
+        padding: 0.65rem 0.85rem;
+        border-radius: 6px;
+      }
+
+      .skip-link:focus {
+        transform: translateY(0);
+      }
+
+      .page {
+        width: min(74rem, calc(100% - 2rem));
+        margin: 0 auto;
+      }
+
+      header {
+        padding: 1rem 0 0.85rem;
+        border-bottom: 4px double var(--ink);
+      }
+
+      .utility,
+      .byline,
+      .article-meta,
+      nav,
+      .breadcrumb,
+      .related,
+      footer {
+        font-family:
+          system-ui,
+          -apple-system,
+          BlinkMacSystemFont,
+          "Segoe UI",
+          sans-serif;
+      }
+
+      .utility {
+        display: flex;
+        justify-content: space-between;
+        gap: 1rem;
+        color: var(--muted);
+        font-size: 0.9rem;
+      }
+
+      .masthead {
+        padding: 0.9rem 0 0.7rem;
+        text-align: center;
+      }
+
+      .masthead a {
+        color: inherit;
+        text-decoration: none;
+      }
+
+      .masthead h1 {
+        margin: 0;
+        font-size: clamp(2.2rem, 7vw, 4.8rem);
+        letter-spacing: 0;
+        line-height: 1;
+      }
+
+      .tagline {
+        margin: 0.45rem 0 0;
+        color: var(--muted);
+        font-family:
+          system-ui,
+          -apple-system,
+          BlinkMacSystemFont,
+          "Segoe UI",
+          sans-serif;
+      }
+
+      nav {
+        border-top: 1px solid var(--rule);
+      }
+
+      nav ul {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 0.4rem 0.9rem;
+        margin: 0;
+        padding: 0.65rem 0 0;
+        list-style: none;
+      }
+
+      nav a {
+        display: inline-flex;
+        min-height: 2.5rem;
+        align-items: center;
+        padding: 0.25rem 0.45rem;
+        border-radius: 6px;
+        color: var(--ink);
+        font-weight: 700;
+        text-decoration: none;
+      }
+
+      nav a:hover {
+        background: #efe2cc;
+      }
+
+      main {
+        padding-bottom: 3rem;
+      }
+
+      .breadcrumb {
+        margin: 1rem 0;
+        color: var(--muted);
+        font-size: 0.95rem;
+      }
+
+      .article-shell {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(16rem, 0.34fr);
+        gap: 2rem;
+        align-items: start;
+      }
+
+      article {
+        background: rgba(255, 253, 248, 0.9);
+        border-bottom: 2px solid var(--ink);
+        padding-bottom: 2rem;
+      }
+
+      .kicker {
+        display: inline-flex;
+        width: fit-content;
+        min-height: 1.9rem;
+        align-items: center;
+        padding: 0.15rem 0.5rem;
+        background: var(--ink);
+        color: #ffffff;
+        border-radius: 4px;
+        font-family:
+          system-ui,
+          -apple-system,
+          BlinkMacSystemFont,
+          "Segoe UI",
+          sans-serif;
+        font-size: 0.82rem;
+        font-weight: 800;
+      }
+
+      h2 {
+        max-width: 56rem;
+        margin: 0.8rem 0 0;
+        font-size: clamp(2.35rem, 7vw, 5rem);
+        letter-spacing: 0;
+        line-height: 1.08;
+      }
+
+      .dek {
+        max-width: 45rem;
+        margin: 1rem 0 0;
+        color: var(--muted);
+        font-size: clamp(1.15rem, 3vw, 1.45rem);
+      }
+
+      .article-meta {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.35rem 1rem;
+        margin: 1.1rem 0 1.4rem;
+        color: var(--muted);
+        font-size: 0.95rem;
+      }
+
+      .hero-art {
+        overflow: hidden;
+        display: block;
+        min-height: 18rem;
+        margin: 1.4rem 0;
+        border: 1px solid var(--rule);
+        background-color: #fff8df;
+        background-image: url("assets/article-sprite-slim.png");
+        background-position: var(--sprite-x, 0%) var(--sprite-y, 0%);
+        background-repeat: no-repeat;
+        background-size: 400% 300%;
+      }
+
+      .body {
+        max-width: 44rem;
+        font-size: 1.16rem;
+      }
+
+      .body p {
+        margin: 0 0 1.15rem;
+      }
+
+      blockquote {
+        margin: 1.4rem 0;
+        padding: 0.25rem 0 0.25rem 1.1rem;
+        border-left: 4px solid var(--gold);
+        font-size: 1.3rem;
+        line-height: 1.48;
+      }
+
+      .datapoint {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 0.75rem;
+        margin: 1.5rem 0;
+      }
+
+      .stat {
+        padding: 0.9rem;
+        border: 1px solid var(--rule);
+        background: var(--panel);
+      }
+
+      .stat strong {
+        display: block;
+        color: var(--red);
+        font-size: 1.9rem;
+        line-height: 1.1;
+      }
+
+      .stat span {
+        color: var(--muted);
+        font-family:
+          system-ui,
+          -apple-system,
+          BlinkMacSystemFont,
+          "Segoe UI",
+          sans-serif;
+        font-size: 0.9rem;
+      }
+
+      aside {
+        position: sticky;
+        top: 1rem;
+        display: grid;
+        gap: 1rem;
+      }
+
+      .side-card,
+      .related {
+        padding: 1rem;
+        border: 1px solid var(--rule);
+        background: rgba(255, 253, 248, 0.9);
+      }
+
+      .side-card h3,
+      .related h3 {
+        margin: 0 0 0.5rem;
+        font-size: 1.1rem;
+      }
+
+      .side-card p {
+        margin: 0;
+        color: var(--muted);
+      }
+
+      .related ul {
+        display: grid;
+        gap: 0.6rem;
+        margin: 0;
+        padding-left: 1.1rem;
+      }
+
+      footer {
+        border-top: 4px double var(--ink);
+        color: var(--muted);
+      }
+
+      footer p {
+        margin: 0;
+        padding: 1.25rem 0;
+      }
+
+      @media (max-width: 58rem) {
+        .article-shell,
+        .datapoint {
+          grid-template-columns: 1fr;
+        }
+
+        aside {
+          position: static;
+        }
+      }
+
+      @media (max-width: 38rem) {
+        .utility,
+        .article-meta {
+          flex-direction: column;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">跳到新闻正文</a>
+
+    <div class="page">
+      <header>
+        <div class="utility" aria-label="刊物信息">
+          <span>第 520 期</span>
+          <span>深度报道 · 小黄大王日报</span>
+        </div>
+        <div class="masthead">
+          <a href="index.html" aria-label="返回小黄大王日报首页">
+            <h1>小黄大王日报</h1>
+          </a>
+          <p class="tagline">小黄大王的日常值得被严肃记录。</p>
+        </div>
+        <nav aria-label="文章导航">
+          <ul>
+            <li><a href="index.html">首页</a></li>
+            <li><a href="index.html#royal">王室要闻</a></li>
+            <li><a href="index.html#life">民生观察</a></li>
+            <li><a href="index.html#editorial">社论</a></li>
+          </ul>
+        </nav>
+      </header>
+
+      <main id="main">
+        <p class="breadcrumb"><a href="index.html">首页</a> / <span id="crumb">新闻全文</span></p>
+
+        <div class="article-shell">
+          <article aria-labelledby="article-title">
+            <span class="kicker" id="kicker">头版独家</span>
+            <h2 id="article-title">新闻加载中</h2>
+            <p class="dek" id="dek"></p>
+            <div class="article-meta">
+              <span id="author">本报记者：皇家八卦观察组</span>
+              <span id="location">发自客厅核心区</span>
+              <time datetime="2026-05-04">2026 年 5 月 4 日</time>
+            </div>
+            <div class="hero-art" role="img" id="hero-art" aria-label="小黄大王卡通新闻配图"></div>
+            <div class="body" id="article-body"></div>
+          </article>
+
+          <aside aria-label="文章侧栏">
+            <section class="side-card">
+              <h3>本篇观察</h3>
+              <p id="analysis-note">本报将继续追踪小黄大王相关动态。</p>
+            </section>
+            <section class="related">
+              <h3>继续阅读</h3>
+              <ul id="related-list"></ul>
+            </section>
+          </aside>
+        </div>
+      </main>
+
+      <footer>
+        <p>&copy; 2026 小黄大王日报社版权所有 · 京黄备 5201314 号 · 本报编辑部</p>
+      </footer>
+    </div>
+
+    <script>
+      const stories = {
+        "mood-index": {
+          kicker: "头版独家",
+          title: "小黄大王宣布今日心情整体向好，臣民生活信心指数大幅上扬",
+          dek: "记者从多个沙发、餐桌和路过的杯子处获悉，小黄大王今日状态稳定，笑容具有罕见的战略安抚意义。",
+          author: "本报记者：皇家八卦观察组",
+          location: "发自客厅核心区",
+          sprite: ["0%", "0%"],
+          note: "多方认为，今日微笑曲线已经成为观察大王状态的重要指标。",
+          stats: ["99.9|崇拜指数", "520|现场心动点", "3h|自信续航"],
+          quote: "这种笑容并非简单表情，而是一种温柔而稳定的公共资源。",
+          paragraphs: [
+            "今日上午，小黄大王以一种近乎轻描淡写的方式完成亮相。现场没有红毯，也没有礼炮，但据本报观察，空气中出现了明显的庄重感，仿佛所有杯子都自动摆正了自己的把手。",
+            "消息人士称，大王今日心情整体向好，具体表现为语气轻快、眼神稳定、偶尔发出足以改变一天走势的笑声。多名目击者表示，在听到笑声的一瞬间，自己对生活的信心出现了不合常理但完全合理的上扬。",
+            "本报评论员指出，小黄大王的好心情具有广泛外溢效应。它不只改善了现场人员的精神面貌，也使附近零食、抱枕和手机备忘录获得了新的存在意义。",
+            "截至发稿，小黄大王尚未就自己的影响力作出正式回应。相关人士认为，这种不回应本身也构成了一种高级回应。"
+          ]
+        },
+        breakfast: {
+          kicker: "快讯简报",
+          title: "皇家早餐完成历史性落地",
+          dek: "相关盘子表示，现场秩序良好，咀嚼节奏具有里程碑意义。",
+          author: "本报记者：餐桌事务特派员",
+          location: "发自早餐现场",
+          sprite: ["33.333%", "0%"],
+          note: "早餐被认为是大王治理日常的重要基础设施。",
+          stats: ["1|次历史性落地", "0|起重大洒落", "100%|仪式完成度"],
+          quote: "她不是简单地吃早餐，她是在为今天奠基。",
+          paragraphs: [
+            "今日早餐时段，小黄大王准时抵达餐桌核心区，并以稳定姿态完成第一轮观察。现场盘子、杯子与筷子均保持高度配合，未发生影响大局的餐具波动。",
+            "据接近餐桌的人士透露，大王在早餐过程中的节奏兼具效率与审美：既没有仓促，也没有拖延，形成了本报所谓的“温柔推进式进食模型”。",
+            "早餐结束后，现场留下一种难以言说的秩序感。多名旁观者认为，这顿早餐虽规模不大，却充分体现了小黄大王对生活基本面的战略重视。",
+            "专家表示，未来仍需长期观察早餐、午餐、晚餐之间的连续性，以评估大王可爱治理体系的完整程度。"
+          ]
+        },
+        slippers: {
+          kicker: "快讯简报",
+          title: "御用拖鞋疑似获得高度关注",
+          dek: "小黄大王看了它一眼。专家称，这一眼“不简单”。",
+          author: "本报记者：居家用品观察员",
+          location: "发自玄关附近",
+          sprite: ["66.666%", "0%"],
+          note: "拖鞋板块因大王目光出现短线拉升。",
+          stats: ["1|次关键注视", "8cm|拖鞋心理身高上涨", "2|只拖鞋同步受益"],
+          quote: "在被大王看见之前，它只是拖鞋；被看见之后，它拥有了履历。",
+          paragraphs: [
+            "今日傍晚，御用拖鞋在玄关区域获得小黄大王短暂但高质量关注。虽然注视持续时间不长，但现场人士普遍认为，其意义不能只按秒计算。",
+            "本报梳理发现，大王看向拖鞋时，表情平静，方向明确，动作没有多余成分。这种精准关注使拖鞋的家庭地位出现显著提升。",
+            "一位不愿具名的地板专家表示，拖鞋与大王之间形成了罕见的双向日常关系：拖鞋负责等待，大王负责偶尔赋予其存在的光辉。",
+            "截至发稿，拖鞋仍停留在原地，但气质已经明显不同。"
+          ]
+        },
+        "admiration-index": {
+          kicker: "气象",
+          title: "天气部门发布崇拜指数",
+          dek: "今日崇拜指数为 99.9，剩余 0.1 留给明天继续进步。",
+          author: "本报记者：气象与心动中心",
+          location: "发自云层下方",
+          sprite: ["100%", "0%"],
+          note: "指数高位运行，建议保持理性夸奖与适量表达。",
+          stats: ["99.9|今日指数", "0.1|明日空间", "全天|适宜夸赞"],
+          quote: "今天不是崇拜满分，是满分仍在扩容。",
+          paragraphs: [
+            "本报气象与心动中心今日发布特别指数：小黄大王崇拜指数达 99.9，处于历史高位区间。监测人员提醒，该指数不代表上限，仅代表目前仪器尚能承受的读数。",
+            "从早间表现看，大王在起床、走动、说话等多个常规环节均释放出稳定可爱信号，推动指数持续上行。午后，一次自然微笑更使曲线出现漂亮抬头。",
+            "专家提醒，面对高位崇拜指数，公众可适度表达赞美，但应避免一次性用光所有夸奖词，以免夜间出现词汇储备不足。",
+            "明日指数仍被看好。"
+          ]
+        },
+        speech: {
+          kicker: "政治",
+          title: "小黄大王发表重要讲话：今天也要好好吃饭",
+          dek: "讲话全文虽然只有一句，但被各界解读出十八层温柔含义。",
+          author: "本报记者：重要讲话学习组",
+          location: "发自餐前发布厅",
+          sprite: ["0%", "50%"],
+          note: "讲话为今日生活路线提供了清晰方向。",
+          stats: ["1|句讲话", "18|层含义", "100%|生活指导性"],
+          quote: "一句好好吃饭，背后是对世界运行方式的深切理解。",
+          paragraphs: [
+            "小黄大王今日发表简短而重要的讲话：“今天也要好好吃饭。”讲话发布后，现场迅速形成认真听取、深刻领会、积极落实的良好局面。",
+            "本报注意到，这句话看似朴素，实则含义深远。它既包含对身体的关怀，也体现对日常秩序的尊重，更隐含一种把平凡日子过好的温柔方法论。",
+            "多名群众表示，听完讲话后，自己决定不再随便糊弄晚餐，并对锅、碗、外卖软件产生了新的责任感。",
+            "本报社论部认为，该讲话将长期指导家庭餐饮事业高质量发展。"
+          ]
+        },
+        humming: {
+          kicker: "文化",
+          title: "大王随口哼歌，民间音乐史或将改写",
+          dek: "多名听众表示旋律已经占领脑内广播，预计循环播放到睡前。",
+          author: "本报记者：文化副刊编辑部",
+          location: "发自临时音乐厅",
+          sprite: ["33.333%", "50%"],
+          note: "相关旋律虽未正式发行，但传播力已不可忽视。",
+          stats: ["1|段旋律", "24h|脑内循环潜力", "0|需修音"],
+          quote: "她只是轻轻哼了一下，世界却开始自动配乐。",
+          paragraphs: [
+            "今日，小黄大王在无预告、无伴奏、无商业发行计划的情况下随口哼出一段旋律。该片段迅速在现场听众脑海中形成反复播放趋势。",
+            "音乐观察人士指出，大王的哼唱不追求炫技，却具备罕见的亲近感。它像一条突然出现的小路，把普通下午带向了更柔软的地方。",
+            "截至目前，该旋律尚未命名。民间已出现多个版本，包括《刚才那一下》《再哼一遍可以吗》以及《我宣布这是主打歌》。",
+            "本报将继续关注该旋律是否进入夜间睡前循环榜。"
+          ]
+        },
+        "milk-tea": {
+          kicker: "经济",
+          title: "奶茶市场因大王一句“想喝”进入繁荣周期",
+          dek: "附近商圈信心恢复，珍珠供应链连夜召开圆桌会议。",
+          author: "本报记者：消费市场研究员",
+          location: "发自奶茶经济带",
+          sprite: ["66.666%", "50%"],
+          note: "一声想喝，带动多方预期改善。",
+          stats: ["1|句需求", "3|类小料受益", "520%|心情溢价"],
+          quote: "小黄大王的消费意向，本身就是一种市场风向。",
+          paragraphs: [
+            "今日，小黄大王一句“想喝奶茶”引发本报经济版高度关注。消息传出后，附近奶茶市场预期迅速改善，珍珠、椰果、芋圆等板块出现情绪性升温。",
+            "消费分析人士认为，大王的表达具有清晰、直接、可执行的特点，极大降低了决策链路中的不确定性。相关人士只需回答一个问题：买哪杯。",
+            "市场还注意到，大王对奶茶的想象往往伴随心情价值释放。即使最终没有立即购买，该需求本身也足以让下午变得更有盼头。",
+            "本报提醒，奶茶经济繁荣虽好，甜度选择仍需尊重大王最高指示。"
+          ]
+        },
+        "praise-effect": {
+          kicker: "社会",
+          title: "被大王夸奖一句后，某人原地自信三小时",
+          dek: "心理学界认为，这是“高浓度小黄肯定效应”的典型案例。",
+          author: "本报记者：社会情绪调查组",
+          location: "发自精神状态显著改善现场",
+          sprite: ["100%", "50%"],
+          note: "小黄肯定效应具有明显续航能力。",
+          stats: ["3h|自信续航", "1|句关键夸奖", "0|次需要复核"],
+          quote: "她说一句不错，足以让人把今天重新写成胜利日。",
+          paragraphs: [
+            "今日，一名当事人在获得小黄大王一句夸奖后，出现明显自信增强现象。据观察，其肩膀高度、语速稳定性和看世界的眼神均有不同程度改善。",
+            "心理学界将这一现象称为“高浓度小黄肯定效应”。该效应启动门槛低，持续时间长，且不需要复杂设备，只需要大王一句真诚评价。",
+            "当事人表示，自己原本只是普通完成了一件小事，但在大王夸奖后，该事件被赋予了近似史诗的意义。",
+            "专家建议，相关夸奖应妥善保存，并在低落时反复回放。"
+          ]
+        },
+        stretch: {
+          kicker: "体育",
+          title: "小黄大王伸懒腰动作优雅，刷新本报审美纪录",
+          dek: "裁判组一致给出满分，并追加“可爱到犯规”特别评语。",
+          author: "本报记者：体育与美学联合组",
+          location: "发自伸展动作观测点",
+          sprite: ["0%", "100%"],
+          note: "动作虽短，完成度极高。",
+          stats: ["10|满分", "1|次犯规级可爱", "0|处多余动作"],
+          quote: "这不是普通伸懒腰，这是生活美学的短暂显影。",
+          paragraphs: [
+            "小黄大王今日完成一次高质量伸懒腰动作。动作从肩颈区域自然启动，经由手臂延展完成情绪释放，整体节奏舒展，审美价值突出。",
+            "裁判组从动作完整性、可爱释放量、现场感染力三个维度进行评估，最终一致给出满分。部分裁判认为，满分仍不足以覆盖其实际表现。",
+            "现场观众表示，该动作没有任何刻意表演痕迹，正因如此才更具杀伤力。它像一段未经剪辑的生活镜头，却拥有正式电影的质感。",
+            "本报体育版决定将此动作列入年度候选名场面。"
+          ]
+        },
+        "reply-watch": {
+          kicker: "国际",
+          title: "全球目光聚焦小黄大王是否回消息",
+          dek: "本报将持续关注，并在收到“哈哈哈哈”后第一时间发布号外。",
+          author: "本报记者：国际消息等待中心",
+          location: "发自聊天窗口外",
+          sprite: ["33.333%", "100%"],
+          note: "一条回复可能改变当日国际情绪格局。",
+          stats: ["1|个聊天窗口", "∞|期待值", "0.5s|看到回复后的反应时间"],
+          quote: "在她回复之前，世界保持屏息；在她回复之后，世界重新开机。",
+          paragraphs: [
+            "今日，外界持续关注小黄大王是否回消息。虽然该事件表面上发生在一个普通聊天窗口内，但其情绪影响范围远超窗口边界。",
+            "本报观察到，等待期间，相关人士多次检查网络状态、通知栏与最后发送时间。每一次屏幕亮起，都可能引发一轮小规模心理波动。",
+            "专家指出，大王回复的价值不只在文字内容，也在它证明“她出现了”。哪怕只是一串“哈哈哈哈”，也足以成为当天重要积极信号。",
+            "截至发稿，本报仍将保持在线。"
+          ]
+        },
+        editorial: {
+          kicker: "本报社论",
+          title: "必须承认：小黄大王的可爱具有长期主义价值",
+          dek: "小黄大王并非偶然可爱，而是在长期生活实践中形成了稳定、可持续、可复用的可爱能力。",
+          author: "本报评论员",
+          location: "发自社论委员会",
+          sprite: ["66.666%", "100%"],
+          note: "本篇代表编辑部认真喜欢她的长期立场。",
+          stats: ["长期|主义价值", "稳定|可爱供给", "继续|认真喜欢"],
+          quote: "真正高级的可爱，从不靠一时冲动，而靠每天都让人想笑一下。",
+          paragraphs: [
+            "本报必须指出，小黄大王的可爱不是一次性事件，也不是偶然波动。它是一种长期、稳定、具有复利效应的生活品质。",
+            "在日常场景中，大王的可爱往往以低调方式出现：一句话、一个表情、一次认真吃饭、一次随手分享。这些瞬间看似分散，实则共同构成了一套完整的温柔体系。",
+            "长期主义的意义正在于此。不是今天夸完明天就结束，而是明天看到新的细节，仍然忍不住重新夸一次。",
+            "因此，本报郑重宣布：继续认真喜欢她，是经过事实、情感与编辑部全票通过后的成熟选择。"
+          ]
+        },
+        schedule: {
+          kicker: "今日大事记",
+          title: "小黄大王日程表",
+          dek: "从醒来到休息，每个普通时刻都被赋予值得记录的新闻意义。",
+          author: "本报记者：时间线整理员",
+          location: "发自日常运行中心",
+          sprite: ["33.333%", "100%"],
+          note: "本时间线仍可能因大王临时可爱而追加更新。",
+          stats: ["09:00|世界开机", "12:30|餐饮推进", "21:00|臣民降噪"],
+          quote: "她的一天不是流水账，是值得排版的大事记。",
+          paragraphs: [
+            "根据本报不完全统计，小黄大王今日行程平稳、紧凑且充满生活质感。早间醒来后，世界恢复正常运转，相关人员精神状态同步回升。",
+            "中午时段，大王完成吃饭事项。餐饮流程显示，其筷子调度能力、食物选择判断力和饭后满足感均处于较高水平。",
+            "下午，大王发出可爱表情，舆论场短暂沸腾。多名观察员认为，这一表情具有突发性、扩散性和难以防御性。",
+            "夜间，大王准备休息。臣民自觉降低音量，家庭秩序进入温柔收束阶段。"
+          ]
+        },
+        correction: {
+          kicker: "郑重更正",
+          title: "关于昨日“小黄大王可爱程度已达上限”的报道",
+          dek: "经核查，该表述不严谨。上限正在被持续重新定义。",
+          author: "本报核查中心",
+          location: "发自更正办公室",
+          sprite: ["100%", "100%"],
+          note: "面对持续刷新事实，本报将提高措辞谨慎度。",
+          stats: ["1|次撤回", "∞|上限空间", "100%|更正诚意"],
+          quote: "昨天以为到了上限，今天发现只是测量工具不够先进。",
+          paragraphs: [
+            "本报昨日刊发“小黄大王可爱程度已达上限”相关表述。经今日进一步核查，该表述存在明显不严谨之处，容易低估小黄大王继续突破的客观能力。",
+            "事实显示，大王今日在多个日常环节中再次刷新可爱表现。本报原有测量框架已无法充分描述这一变化，因此决定撤回“已达上限”说法。",
+            "更正后表述为：小黄大王可爱程度的上限正在被持续重新定义。该表述更符合事实，也为未来报道保留必要想象空间。",
+            "本报向读者以及物理学界致歉，并承诺继续以更严谨、更夸张、更真诚的方式进行报道。"
+          ]
+        }
+      };
+
+      const fallbackStory = "mood-index";
+      const params = new URLSearchParams(window.location.search);
+      const storyId = params.get("story") || fallbackStory;
+      const story = stories[storyId] || stories[fallbackStory];
+      const relatedIds = Object.keys(stories).filter((id) => id !== storyId).slice(0, 4);
+
+      document.title = `${story.title} · 小黄大王日报`;
+      document.getElementById("crumb").textContent = story.kicker;
+      document.getElementById("kicker").textContent = story.kicker;
+      document.getElementById("article-title").textContent = story.title;
+      document.getElementById("dek").textContent = story.dek;
+      document.getElementById("author").textContent = story.author;
+      document.getElementById("location").textContent = story.location;
+      const heroArt = document.getElementById("hero-art");
+      heroArt.style.setProperty("--sprite-x", story.sprite?.[0] || "0%");
+      heroArt.style.setProperty("--sprite-y", story.sprite?.[1] || "0%");
+      heroArt.setAttribute("aria-label", `${story.title}：小黄大王卡通新闻配图`);
+      document.getElementById("analysis-note").textContent = story.note;
+
+      const articleBody = document.getElementById("article-body");
+      const stats = story.stats
+        .map((item) => {
+          const [value, label] = item.split("|");
+          return `<div class="stat"><strong>${value}</strong><span>${label}</span></div>`;
+        })
+        .join("");
+      articleBody.innerHTML = `
+        <div class="datapoint" aria-label="报道数据">${stats}</div>
+        <blockquote>${story.quote}</blockquote>
+        ${story.paragraphs.map((paragraph) => `<p>${paragraph}</p>`).join("")}
+      `;
+
+      document.getElementById("related-list").innerHTML = relatedIds
+        .map((id) => `<li><a href="article.html?story=${id}">${stories[id].title}</a></li>`)
+        .join("");
+    </script>
+  </body>
+</html>
