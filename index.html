@@ -1,0 +1,698 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>小黄大王日报</title>
+    <meta
+      name="description"
+      content="小黄大王日报：一份严肃报道小黄大王伟大日常的恶搞新闻网站。"
+    >
+    <style>
+      :root {
+        color-scheme: light;
+        --paper: #fbf7ef;
+        --ink: #1f1d1a;
+        --muted: #5f5a50;
+        --rule: #cbc0ad;
+        --panel: #fffdf8;
+        --gold: #b7791f;
+        --red: #9b2226;
+        --green: #0f766e;
+        --focus: #2563eb;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        margin: 0;
+        background:
+          linear-gradient(rgba(255, 255, 255, 0.52), rgba(255, 255, 255, 0.52)),
+          repeating-linear-gradient(
+            0deg,
+            var(--paper),
+            var(--paper) 18px,
+            #f4ead9 19px
+          );
+        color: var(--ink);
+        font-family:
+          Georgia,
+          "Times New Roman",
+          "Noto Serif SC",
+          "Songti SC",
+          serif;
+        line-height: 1.62;
+      }
+
+      a {
+        color: var(--red);
+        text-underline-offset: 0.18em;
+      }
+
+      a:focus-visible,
+      button:focus-visible {
+        outline: 3px solid var(--focus);
+        outline-offset: 4px;
+      }
+
+      .skip-link {
+        position: absolute;
+        left: 1rem;
+        top: 1rem;
+        z-index: 20;
+        transform: translateY(-160%);
+        background: var(--ink);
+        color: #ffffff;
+        padding: 0.65rem 0.85rem;
+        border-radius: 6px;
+      }
+
+      .skip-link:focus {
+        transform: translateY(0);
+      }
+
+      .page {
+        width: min(74rem, calc(100% - 2rem));
+        margin: 0 auto;
+      }
+
+      header {
+        padding: 1rem 0 0.75rem;
+        border-bottom: 4px double var(--ink);
+      }
+
+      .utility {
+        display: flex;
+        justify-content: space-between;
+        gap: 1rem;
+        color: var(--muted);
+        font-family:
+          system-ui,
+          -apple-system,
+          BlinkMacSystemFont,
+          "Segoe UI",
+          sans-serif;
+        font-size: 0.9rem;
+      }
+
+      .masthead {
+        display: grid;
+        grid-template-columns: 6rem 1fr 6rem;
+        align-items: center;
+        gap: 1rem;
+        padding: 1rem 0;
+        text-align: center;
+      }
+
+      .crest {
+        width: 5.5rem;
+        max-width: 100%;
+        height: auto;
+      }
+
+      .masthead h1 {
+        margin: 0;
+        font-size: clamp(2.6rem, 9vw, 5.8rem);
+        letter-spacing: 0;
+        line-height: 1;
+      }
+
+      .tagline {
+        margin: 0.45rem 0 0;
+        color: var(--muted);
+        font-family:
+          system-ui,
+          -apple-system,
+          BlinkMacSystemFont,
+          "Segoe UI",
+          sans-serif;
+        font-size: 1rem;
+      }
+
+      nav {
+        border-top: 1px solid var(--rule);
+      }
+
+      nav ul {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 0.4rem 0.9rem;
+        margin: 0;
+        padding: 0.65rem 0 0;
+        list-style: none;
+      }
+
+      nav a {
+        display: inline-flex;
+        min-height: 2.5rem;
+        align-items: center;
+        padding: 0.25rem 0.45rem;
+        border-radius: 6px;
+        color: var(--ink);
+        font-family:
+          system-ui,
+          -apple-system,
+          BlinkMacSystemFont,
+          "Segoe UI",
+          sans-serif;
+        font-weight: 700;
+        text-decoration: none;
+      }
+
+      nav a:hover {
+        background: #efe2cc;
+      }
+
+      main {
+        padding-bottom: 3rem;
+      }
+
+      .ticker {
+        display: grid;
+        grid-template-columns: auto 1fr;
+        gap: 0.8rem;
+        margin: 1rem 0;
+        border: 1px solid var(--ink);
+        background: var(--panel);
+      }
+
+      .ticker strong {
+        display: inline-flex;
+        align-items: center;
+        padding: 0.6rem 0.8rem;
+        background: var(--red);
+        color: #ffffff;
+        font-family:
+          system-ui,
+          -apple-system,
+          BlinkMacSystemFont,
+          "Segoe UI",
+          sans-serif;
+      }
+
+      .ticker p {
+        margin: 0;
+        padding: 0.6rem 0.8rem 0.6rem 0;
+      }
+
+      .lead-grid {
+        display: grid;
+        grid-template-columns: minmax(0, 1.6fr) minmax(17rem, 0.8fr);
+        gap: 1.25rem;
+        border-bottom: 2px solid var(--ink);
+        padding-bottom: 1.5rem;
+      }
+
+      .hero-story,
+      .side-briefs,
+      .card,
+      .editorial,
+      .timeline,
+      .correction {
+        background: rgba(255, 253, 248, 0.88);
+      }
+
+      .hero-story {
+        display: grid;
+        gap: 1rem;
+        padding-right: 1.25rem;
+        border-right: 1px solid var(--rule);
+      }
+
+      .label {
+        display: inline-flex;
+        width: fit-content;
+        align-items: center;
+        min-height: 1.9rem;
+        padding: 0.15rem 0.5rem;
+        background: var(--ink);
+        color: #ffffff;
+        border-radius: 4px;
+        font-family:
+          system-ui,
+          -apple-system,
+          BlinkMacSystemFont,
+          "Segoe UI",
+          sans-serif;
+        font-size: 0.82rem;
+        font-weight: 800;
+      }
+
+      h2,
+      h3 {
+        line-height: 1.18;
+      }
+
+      h2 {
+        margin: 0;
+        font-size: clamp(2rem, 6vw, 4.25rem);
+      }
+
+      h3 {
+        margin: 0 0 0.35rem;
+        font-size: 1.25rem;
+      }
+
+      .dek {
+        margin: 0;
+        color: var(--muted);
+        font-size: 1.2rem;
+      }
+
+      .byline {
+        margin: 0;
+        color: var(--muted);
+        font-family:
+          system-ui,
+          -apple-system,
+          BlinkMacSystemFont,
+          "Segoe UI",
+          sans-serif;
+        font-size: 0.94rem;
+      }
+
+      .portrait-panel {
+        display: grid;
+        grid-template-columns: minmax(10rem, 18rem) 1fr;
+        gap: 1rem;
+        align-items: center;
+        border: 1px solid var(--rule);
+        padding: 1rem;
+      }
+
+      .portrait {
+        display: grid;
+        min-height: 13rem;
+        place-items: center;
+        border: 2px solid var(--gold);
+        background:
+          radial-gradient(circle at 50% 35%, #ffe6a7 0 18%, transparent 19%),
+          linear-gradient(135deg, #fef3c7, #f8d98b 48%, #fff8df);
+      }
+
+      .portrait span {
+        width: min-content;
+        color: #4a2f04;
+        font-size: 3rem;
+        font-weight: 900;
+        line-height: 1.05;
+        text-align: center;
+      }
+
+      .quote {
+        margin: 0;
+        padding-left: 1rem;
+        border-left: 4px solid var(--gold);
+        font-size: 1.15rem;
+      }
+
+      .side-briefs {
+        display: grid;
+        gap: 1rem;
+      }
+
+      .brief {
+        padding-bottom: 1rem;
+        border-bottom: 1px solid var(--rule);
+      }
+
+      .brief:last-child {
+        border-bottom: 0;
+      }
+
+      .brief p,
+      .card p,
+      .editorial p,
+      .timeline p,
+      .correction p {
+        margin: 0;
+        color: var(--muted);
+      }
+
+      section {
+        padding: 1.7rem 0;
+      }
+
+      .section-title {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        margin-bottom: 1rem;
+        border-bottom: 2px solid var(--ink);
+      }
+
+      .section-title h2 {
+        font-size: 1.7rem;
+      }
+
+      .section-title span {
+        color: var(--muted);
+        font-family:
+          system-ui,
+          -apple-system,
+          BlinkMacSystemFont,
+          "Segoe UI",
+          sans-serif;
+        font-size: 0.92rem;
+      }
+
+      .news-grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 1rem;
+      }
+
+      .card {
+        min-height: 14rem;
+        padding: 1rem;
+        border: 1px solid var(--rule);
+      }
+
+      .card .kicker {
+        margin: 0 0 0.5rem;
+        color: var(--red);
+        font-family:
+          system-ui,
+          -apple-system,
+          BlinkMacSystemFont,
+          "Segoe UI",
+          sans-serif;
+        font-size: 0.78rem;
+        font-weight: 800;
+        text-transform: uppercase;
+      }
+
+      .two-column {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+        gap: 1rem;
+      }
+
+      .editorial,
+      .timeline,
+      .correction {
+        padding: 1.2rem;
+        border: 1px solid var(--rule);
+      }
+
+      .timeline ol {
+        margin: 0;
+        padding-left: 1.4rem;
+      }
+
+      .timeline li + li {
+        margin-top: 0.75rem;
+      }
+
+      .poll {
+        display: grid;
+        gap: 0.75rem;
+        margin-top: 0.5rem;
+      }
+
+      .bar {
+        display: grid;
+        grid-template-columns: 8rem 1fr auto;
+        gap: 0.75rem;
+        align-items: center;
+        font-family:
+          system-ui,
+          -apple-system,
+          BlinkMacSystemFont,
+          "Segoe UI",
+          sans-serif;
+      }
+
+      .track {
+        overflow: hidden;
+        height: 0.75rem;
+        background: #e5dbc8;
+        border-radius: 999px;
+      }
+
+      .fill {
+        display: block;
+        height: 100%;
+        background: var(--green);
+      }
+
+      .correction {
+        border-color: var(--red);
+      }
+
+      footer {
+        border-top: 4px double var(--ink);
+        color: var(--muted);
+        font-family:
+          system-ui,
+          -apple-system,
+          BlinkMacSystemFont,
+          "Segoe UI",
+          sans-serif;
+      }
+
+      footer p {
+        margin: 0;
+        padding: 1.25rem 0;
+      }
+
+      @media (max-width: 58rem) {
+        .masthead {
+          grid-template-columns: 1fr;
+        }
+
+        .crest {
+          justify-self: center;
+        }
+
+        .lead-grid,
+        .portrait-panel,
+        .two-column {
+          grid-template-columns: 1fr;
+        }
+
+        .hero-story {
+          padding-right: 0;
+          border-right: 0;
+        }
+
+        .news-grid {
+          grid-template-columns: 1fr 1fr;
+        }
+      }
+
+      @media (max-width: 38rem) {
+        .utility,
+        .ticker,
+        .bar {
+          grid-template-columns: 1fr;
+        }
+
+        .ticker p {
+          padding: 0 0.8rem 0.7rem;
+        }
+
+        .news-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">跳到主要新闻</a>
+
+    <div class="page">
+      <header>
+        <div class="utility" aria-label="刊物信息">
+          <span>第 520 期</span>
+          <span>今日特刊：小黄大王宇宙级日常观察</span>
+          <span>娱乐恶搞版</span>
+        </div>
+
+        <div class="masthead">
+          <svg class="crest" role="img" viewBox="0 0 120 120" aria-labelledby="crest-title">
+            <title id="crest-title">小黄大王日报徽章：皇冠与字母黄</title>
+            <circle cx="60" cy="60" r="54" fill="#fff8df" stroke="#1f1d1a" stroke-width="4"></circle>
+            <path d="M26 50l15-18 19 18 19-18 15 18v30H26z" fill="#d69e2e" stroke="#1f1d1a" stroke-width="4"></path>
+            <text x="60" y="76" text-anchor="middle" font-size="38" font-weight="900" fill="#1f1d1a">黄</text>
+          </svg>
+          <div>
+            <h1>小黄大王日报</h1>
+            <p class="tagline">凡小黄所到之处，皆为头版头条。</p>
+          </div>
+          <svg class="crest" aria-hidden="true" viewBox="0 0 120 120">
+            <circle cx="60" cy="60" r="54" fill="#fff8df" stroke="#1f1d1a" stroke-width="4"></circle>
+            <path d="M26 50l15-18 19 18 19-18 15 18v30H26z" fill="#d69e2e" stroke="#1f1d1a" stroke-width="4"></path>
+            <text x="60" y="76" text-anchor="middle" font-size="38" font-weight="900" fill="#1f1d1a">黄</text>
+          </svg>
+        </div>
+
+        <nav aria-label="主要栏目">
+          <ul>
+            <li><a href="#headline">头版</a></li>
+            <li><a href="#royal">王室要闻</a></li>
+            <li><a href="#life">民生观察</a></li>
+            <li><a href="#editorial">社论</a></li>
+            <li><a href="#correction">更正声明</a></li>
+          </ul>
+        </nav>
+      </header>
+
+      <main id="main">
+        <aside class="ticker" aria-label="突发快讯">
+          <strong>突发</strong>
+          <p>本报刚刚确认：小黄大王今日再次以普通走路姿态震撼全场，目击者称“很难不肃然起敬”。</p>
+        </aside>
+
+        <section id="headline" class="lead-grid" aria-labelledby="headline-title">
+          <article class="hero-story">
+            <span class="label">头版独家</span>
+            <h2 id="headline-title">小黄大王宣布今日心情整体向好，臣民生活信心指数大幅上扬</h2>
+            <p class="dek">
+              记者从多个沙发、餐桌和路过的杯子处获悉，小黄大王今日状态稳定，
+              笑容具有罕见的战略安抚意义。
+            </p>
+            <p class="byline">本报记者：皇家八卦观察组 · 发自客厅核心区</p>
+
+            <div class="portrait-panel">
+              <div class="portrait" role="img" aria-label="写有小黄大王四字的金色头版画像占位图">
+                <span>小黄 大王</span>
+              </div>
+              <blockquote class="quote">
+                “经本报严肃研判，小黄大王随手拿起一杯水，也足以构成年度公共事件。”
+              </blockquote>
+            </div>
+          </article>
+
+          <aside class="side-briefs" aria-labelledby="briefs-title">
+            <h2 id="briefs-title" class="label">快讯简报</h2>
+            <article class="brief">
+              <h3>皇家早餐完成历史性落地</h3>
+              <p>相关盘子表示，现场秩序良好，咀嚼节奏具有里程碑意义。</p>
+            </article>
+            <article class="brief">
+              <h3>御用拖鞋疑似获得高度关注</h3>
+              <p>小黄大王看了它一眼。专家称，这一眼“不简单”。</p>
+            </article>
+            <article class="brief">
+              <h3>天气部门发布崇拜指数</h3>
+              <p>今日崇拜指数为 99.9，剩余 0.1 留给明天继续进步。</p>
+            </article>
+          </aside>
+        </section>
+
+        <section id="royal" aria-labelledby="royal-title">
+          <div class="section-title">
+            <h2 id="royal-title">王室要闻</h2>
+            <span>所有新闻均以爱与夸张为事实基础</span>
+          </div>
+
+          <div class="news-grid">
+            <article class="card">
+              <p class="kicker">政治</p>
+              <h3>小黄大王发表重要讲话：今天也要好好吃饭</h3>
+              <p>讲话全文虽然只有一句，但被各界解读出十八层温柔含义。</p>
+            </article>
+            <article class="card">
+              <p class="kicker">文化</p>
+              <h3>大王随口哼歌，民间音乐史或将改写</h3>
+              <p>多名听众表示旋律已经占领脑内广播，预计循环播放到睡前。</p>
+            </article>
+            <article class="card">
+              <p class="kicker">经济</p>
+              <h3>奶茶市场因大王一句“想喝”进入繁荣周期</h3>
+              <p>附近商圈信心恢复，珍珠供应链连夜召开圆桌会议。</p>
+            </article>
+          </div>
+        </section>
+
+        <section id="life" aria-labelledby="life-title">
+          <div class="section-title">
+            <h2 id="life-title">民生观察</h2>
+            <span>记录小黄大王统治下的幸福生活</span>
+          </div>
+
+          <div class="news-grid">
+            <article class="card">
+              <p class="kicker">社会</p>
+              <h3>被大王夸奖一句后，某人原地自信三小时</h3>
+              <p>心理学界认为，这是“高浓度小黄肯定效应”的典型案例。</p>
+            </article>
+            <article class="card">
+              <p class="kicker">体育</p>
+              <h3>小黄大王伸懒腰动作优雅，刷新本报审美纪录</h3>
+              <p>裁判组一致给出满分，并追加“可爱到犯规”特别评语。</p>
+            </article>
+            <article class="card">
+              <p class="kicker">国际</p>
+              <h3>全球目光聚焦小黄大王是否回消息</h3>
+              <p>本报将持续关注，并在收到“哈哈哈哈”后第一时间发布号外。</p>
+            </article>
+          </div>
+        </section>
+
+        <section class="two-column" aria-label="社论与时间线">
+          <article id="editorial" class="editorial">
+            <span class="label">本报社论</span>
+            <h2>必须承认：小黄大王的可爱具有长期主义价值</h2>
+            <p>
+              本报认为，小黄大王并非偶然可爱，而是在长期生活实践中形成了稳定、
+              可持续、可复用的可爱能力。面对这种局面，我们唯一成熟的回应，
+              就是继续认真喜欢她。
+            </p>
+
+            <div class="poll" aria-label="今日民调结果">
+              <div class="bar">
+                <span>支持大王</span>
+                <span class="track"><span class="fill" style="width: 98%"></span></span>
+                <strong>98%</strong>
+              </div>
+              <div class="bar">
+                <span>非常支持</span>
+                <span class="track"><span class="fill" style="width: 100%"></span></span>
+                <strong>100%</strong>
+              </div>
+              <div class="bar">
+                <span>还想再夸</span>
+                <span class="track"><span class="fill" style="width: 96%"></span></span>
+                <strong>96%</strong>
+              </div>
+            </div>
+          </article>
+
+          <article class="timeline">
+            <span class="label">今日大事记</span>
+            <h2>小黄大王日程表</h2>
+            <ol>
+              <li><strong>09:00</strong> 大王醒来，世界恢复正常运转。</li>
+              <li><strong>12:30</strong> 大王吃饭，本报称赞其筷子调度能力。</li>
+              <li><strong>16:20</strong> 大王发出可爱表情，舆论场短暂沸腾。</li>
+              <li><strong>21:00</strong> 大王准备休息，臣民自觉降低音量。</li>
+            </ol>
+          </article>
+        </section>
+
+        <section id="correction" class="correction" aria-labelledby="correction-title">
+          <span class="label">郑重更正</span>
+          <h2 id="correction-title">关于昨日“小黄大王可爱程度已达上限”的报道</h2>
+          <p>
+            经核查，该表述不严谨。小黄大王今日再次突破上限，因此本报决定撤回
+            “已达上限”说法，改为“上限正在被持续重新定义”。特此更正，并向读者
+            以及物理学界致歉。
+          </p>
+        </section>
+      </main>
+
+      <footer>
+        <p>免责声明：本站为私人恶搞礼物，不代表任何真实新闻机构观点。请勿将夸张修辞用于严肃场合。</p>
+      </footer>
+    </div>
+  </body>
+</html>
