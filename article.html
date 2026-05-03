@@ -226,23 +226,16 @@
       }
 
       .hero-art {
-        display: grid;
+        overflow: hidden;
+        display: block;
         min-height: 18rem;
-        place-items: center;
         margin: 1.4rem 0;
         border: 1px solid var(--rule);
-        background:
-          radial-gradient(circle at 50% 38%, #ffe6a7 0 16%, transparent 17%),
-          linear-gradient(135deg, #fff8df, #f2cf7a 45%, #fffdf8);
-      }
-
-      .hero-art span {
-        max-width: 18rem;
-        color: #4a2f04;
-        font-size: clamp(2.5rem, 7vw, 4.3rem);
-        font-weight: 900;
-        line-height: 1.05;
-        text-align: center;
+        background-color: #fff8df;
+        background-image: url("assets/article-sprite-slim.png");
+        background-position: var(--sprite-x, 0%) var(--sprite-y, 0%);
+        background-repeat: no-repeat;
+        background-size: 400% 300%;
       }
 
       .body {
@@ -392,9 +385,7 @@
               <span id="location">发自客厅核心区</span>
               <time datetime="2026-05-04">2026 年 5 月 4 日</time>
             </div>
-            <div class="hero-art" role="img" id="hero-art" aria-label="金色新闻配图">
-              <span id="hero-word">小黄 大王</span>
-            </div>
+            <div class="hero-art" role="img" id="hero-art" aria-label="小黄大王卡通新闻配图"></div>
             <div class="body" id="article-body"></div>
           </article>
 
@@ -424,7 +415,7 @@
           dek: "记者从多个沙发、餐桌和路过的杯子处获悉，小黄大王今日状态稳定，笑容具有罕见的战略安抚意义。",
           author: "本报记者：皇家八卦观察组",
           location: "发自客厅核心区",
-          hero: "心情 向好",
+          sprite: ["0%", "0%"],
           note: "多方认为，今日微笑曲线已经成为观察大王状态的重要指标。",
           stats: ["99.9|崇拜指数", "520|现场心动点", "3h|自信续航"],
           quote: "这种笑容并非简单表情，而是一种温柔而稳定的公共资源。",
@@ -441,7 +432,7 @@
           dek: "相关盘子表示，现场秩序良好，咀嚼节奏具有里程碑意义。",
           author: "本报记者：餐桌事务特派员",
           location: "发自早餐现场",
-          hero: "皇家 早餐",
+          sprite: ["33.333%", "0%"],
           note: "早餐被认为是大王治理日常的重要基础设施。",
           stats: ["1|次历史性落地", "0|起重大洒落", "100%|仪式完成度"],
           quote: "她不是简单地吃早餐，她是在为今天奠基。",
@@ -458,7 +449,7 @@
           dek: "小黄大王看了它一眼。专家称，这一眼“不简单”。",
           author: "本报记者：居家用品观察员",
           location: "发自玄关附近",
-          hero: "重要 一眼",
+          sprite: ["66.666%", "0%"],
           note: "拖鞋板块因大王目光出现短线拉升。",
           stats: ["1|次关键注视", "8cm|拖鞋心理身高上涨", "2|只拖鞋同步受益"],
           quote: "在被大王看见之前，它只是拖鞋；被看见之后，它拥有了履历。",
@@ -475,7 +466,7 @@
           dek: "今日崇拜指数为 99.9，剩余 0.1 留给明天继续进步。",
           author: "本报记者：气象与心动中心",
           location: "发自云层下方",
-          hero: "崇拜 指数",
+          sprite: ["100%", "0%"],
           note: "指数高位运行，建议保持理性夸奖与适量表达。",
           stats: ["99.9|今日指数", "0.1|明日空间", "全天|适宜夸赞"],
           quote: "今天不是崇拜满分，是满分仍在扩容。",
@@ -492,7 +483,7 @@
           dek: "讲话全文虽然只有一句，但被各界解读出十八层温柔含义。",
           author: "本报记者：重要讲话学习组",
           location: "发自餐前发布厅",
-          hero: "好好 吃饭",
+          sprite: ["0%", "50%"],
           note: "讲话为今日生活路线提供了清晰方向。",
           stats: ["1|句讲话", "18|层含义", "100%|生活指导性"],
           quote: "一句好好吃饭，背后是对世界运行方式的深切理解。",
@@ -509,7 +500,7 @@
           dek: "多名听众表示旋律已经占领脑内广播，预计循环播放到睡前。",
           author: "本报记者：文化副刊编辑部",
           location: "发自临时音乐厅",
-          hero: "随口 哼歌",
+          sprite: ["33.333%", "50%"],
           note: "相关旋律虽未正式发行，但传播力已不可忽视。",
           stats: ["1|段旋律", "24h|脑内循环潜力", "0|需修音"],
           quote: "她只是轻轻哼了一下，世界却开始自动配乐。",
@@ -526,7 +517,7 @@
           dek: "附近商圈信心恢复，珍珠供应链连夜召开圆桌会议。",
           author: "本报记者：消费市场研究员",
           location: "发自奶茶经济带",
-          hero: "奶茶 景气",
+          sprite: ["66.666%", "50%"],
           note: "一声想喝，带动多方预期改善。",
           stats: ["1|句需求", "3|类小料受益", "520%|心情溢价"],
           quote: "小黄大王的消费意向，本身就是一种市场风向。",
@@ -543,7 +534,7 @@
           dek: "心理学界认为，这是“高浓度小黄肯定效应”的典型案例。",
           author: "本报记者：社会情绪调查组",
           location: "发自精神状态显著改善现场",
-          hero: "被夸 起飞",
+          sprite: ["100%", "50%"],
           note: "小黄肯定效应具有明显续航能力。",
           stats: ["3h|自信续航", "1|句关键夸奖", "0|次需要复核"],
           quote: "她说一句不错，足以让人把今天重新写成胜利日。",
@@ -560,7 +551,7 @@
           dek: "裁判组一致给出满分，并追加“可爱到犯规”特别评语。",
           author: "本报记者：体育与美学联合组",
           location: "发自伸展动作观测点",
-          hero: "优雅 伸展",
+          sprite: ["0%", "100%"],
           note: "动作虽短，完成度极高。",
           stats: ["10|满分", "1|次犯规级可爱", "0|处多余动作"],
           quote: "这不是普通伸懒腰，这是生活美学的短暂显影。",
@@ -577,7 +568,7 @@
           dek: "本报将持续关注，并在收到“哈哈哈哈”后第一时间发布号外。",
           author: "本报记者：国际消息等待中心",
           location: "发自聊天窗口外",
-          hero: "等待 回复",
+          sprite: ["33.333%", "100%"],
           note: "一条回复可能改变当日国际情绪格局。",
           stats: ["1|个聊天窗口", "∞|期待值", "0.5s|看到回复后的反应时间"],
           quote: "在她回复之前，世界保持屏息；在她回复之后，世界重新开机。",
@@ -594,7 +585,7 @@
           dek: "小黄大王并非偶然可爱，而是在长期生活实践中形成了稳定、可持续、可复用的可爱能力。",
           author: "本报评论员",
           location: "发自社论委员会",
-          hero: "长期 可爱",
+          sprite: ["66.666%", "100%"],
           note: "本篇代表编辑部认真喜欢她的长期立场。",
           stats: ["长期|主义价值", "稳定|可爱供给", "继续|认真喜欢"],
           quote: "真正高级的可爱，从不靠一时冲动，而靠每天都让人想笑一下。",
@@ -611,7 +602,7 @@
           dek: "从醒来到休息，每个普通时刻都被赋予值得记录的新闻意义。",
           author: "本报记者：时间线整理员",
           location: "发自日常运行中心",
-          hero: "今日 日程",
+          sprite: ["33.333%", "100%"],
           note: "本时间线仍可能因大王临时可爱而追加更新。",
           stats: ["09:00|世界开机", "12:30|餐饮推进", "21:00|臣民降噪"],
           quote: "她的一天不是流水账，是值得排版的大事记。",
@@ -628,7 +619,7 @@
           dek: "经核查，该表述不严谨。上限正在被持续重新定义。",
           author: "本报核查中心",
           location: "发自更正办公室",
-          hero: "郑重 更正",
+          sprite: ["100%", "100%"],
           note: "面对持续刷新事实，本报将提高措辞谨慎度。",
           stats: ["1|次撤回", "∞|上限空间", "100%|更正诚意"],
           quote: "昨天以为到了上限，今天发现只是测量工具不够先进。",
@@ -654,8 +645,10 @@
       document.getElementById("dek").textContent = story.dek;
       document.getElementById("author").textContent = story.author;
       document.getElementById("location").textContent = story.location;
-      document.getElementById("hero-word").textContent = story.hero;
-      document.getElementById("hero-art").setAttribute("aria-label", `${story.title} 配图`);
+      const heroArt = document.getElementById("hero-art");
+      heroArt.style.setProperty("--sprite-x", story.sprite?.[0] || "0%");
+      heroArt.style.setProperty("--sprite-y", story.sprite?.[1] || "0%");
+      heroArt.setAttribute("aria-label", `${story.title}：小黄大王卡通新闻配图`);
       document.getElementById("analysis-note").textContent = story.note;
 
       const articleBody = document.getElementById("article-body");

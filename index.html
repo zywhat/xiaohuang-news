@@ -61,6 +61,13 @@
         outline-offset: 4px;
       }
 
+      button,
+      input,
+      select,
+      textarea {
+        font: inherit;
+      }
+
       .skip-link {
         position: absolute;
         left: 1rem;
@@ -111,7 +118,7 @@
       }
 
       .crest {
-        width: 5.5rem;
+        width: 6.4rem;
         max-width: 100%;
         height: auto;
       }
@@ -304,22 +311,15 @@
       }
 
       .portrait {
-        display: grid;
+        overflow: hidden;
+        display: block;
         min-height: 13rem;
-        place-items: center;
         border: 2px solid var(--gold);
-        background:
-          radial-gradient(circle at 50% 35%, #ffe6a7 0 18%, transparent 19%),
-          linear-gradient(135deg, #fef3c7, #f8d98b 48%, #fff8df);
-      }
-
-      .portrait span {
-        width: min-content;
-        color: #4a2f04;
-        font-size: 3rem;
-        font-weight: 900;
-        line-height: 1.05;
-        text-align: center;
+        background-color: #fff8df;
+        background-image: url("assets/article-sprite-slim.png");
+        background-position: 0% 0%;
+        background-repeat: no-repeat;
+        background-size: 400% 300%;
       }
 
       .quote {
@@ -425,6 +425,185 @@
 
       .timeline li + li {
         margin-top: 0.75rem;
+      }
+
+      .summon-button {
+        display: inline-flex;
+        width: fit-content;
+        min-height: 2.8rem;
+        align-items: center;
+        justify-content: center;
+        margin-top: 1.2rem;
+        padding: 0.55rem 0.9rem;
+        border: 2px solid var(--ink);
+        border-radius: 6px;
+        background: var(--red);
+        color: #ffffff;
+        cursor: pointer;
+        font-family:
+          system-ui,
+          -apple-system,
+          BlinkMacSystemFont,
+          "Segoe UI",
+          sans-serif;
+        font-weight: 800;
+      }
+
+      .summon-button:hover {
+        background: #7f1d1d;
+      }
+
+      dialog {
+        width: min(42rem, calc(100% - 2rem));
+        max-height: min(44rem, calc(100% - 2rem));
+        overflow: auto;
+        padding: 0;
+        border: 2px solid var(--ink);
+        background: var(--panel);
+        color: var(--ink);
+      }
+
+      dialog::backdrop {
+        background: rgba(31, 29, 26, 0.54);
+      }
+
+      .modal-head,
+      .modal-body,
+      .modal-actions {
+        padding: 1rem;
+      }
+
+      .modal-head {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        gap: 1rem;
+        border-bottom: 1px solid var(--rule);
+      }
+
+      .modal-head h2 {
+        margin: 0;
+        font-size: 1.7rem;
+      }
+
+      .close-button {
+        display: inline-flex;
+        min-width: 2.4rem;
+        min-height: 2.4rem;
+        align-items: center;
+        justify-content: center;
+        border: 1px solid var(--ink);
+        border-radius: 999px;
+        background: #ffffff;
+        cursor: pointer;
+        font-family:
+          system-ui,
+          -apple-system,
+          BlinkMacSystemFont,
+          "Segoe UI",
+          sans-serif;
+        font-weight: 900;
+      }
+
+      .modal-body {
+        display: grid;
+        gap: 1rem;
+      }
+
+      .field {
+        display: grid;
+        gap: 0.35rem;
+      }
+
+      .field label {
+        font-family:
+          system-ui,
+          -apple-system,
+          BlinkMacSystemFont,
+          "Segoe UI",
+          sans-serif;
+        font-weight: 800;
+      }
+
+      .field input,
+      .field select,
+      .field textarea {
+        width: 100%;
+        min-height: 2.75rem;
+        padding: 0.65rem 0.75rem;
+        border: 1px solid var(--rule);
+        border-radius: 6px;
+        background: #fffdf8;
+        color: var(--ink);
+      }
+
+      .field textarea {
+        min-height: 9rem;
+        resize: vertical;
+      }
+
+      .memorial-frame {
+        display: grid;
+        gap: 0.7rem;
+        padding: 1rem;
+        border: 1px solid var(--gold);
+        background: #fff8df;
+      }
+
+      .fixed-text {
+        margin: 0;
+        color: #4a2f04;
+        font-weight: 700;
+      }
+
+      .modal-actions {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: flex-end;
+        gap: 0.75rem;
+        border-top: 1px solid var(--rule);
+      }
+
+      .secondary-button,
+      .primary-button {
+        display: inline-flex;
+        min-height: 2.65rem;
+        align-items: center;
+        justify-content: center;
+        padding: 0.5rem 0.85rem;
+        border-radius: 6px;
+        cursor: pointer;
+        font-family:
+          system-ui,
+          -apple-system,
+          BlinkMacSystemFont,
+          "Segoe UI",
+          sans-serif;
+        font-weight: 800;
+      }
+
+      .secondary-button {
+        border: 1px solid var(--ink);
+        background: #ffffff;
+        color: var(--ink);
+      }
+
+      .primary-button {
+        border: 1px solid var(--red);
+        background: var(--red);
+        color: #ffffff;
+      }
+
+      .confirmation {
+        margin: 0;
+        color: var(--green);
+        font-family:
+          system-ui,
+          -apple-system,
+          BlinkMacSystemFont,
+          "Segoe UI",
+          sans-serif;
+        font-weight: 800;
       }
 
       .poll {
@@ -533,19 +712,43 @@
 
         <div class="masthead">
           <svg class="crest" role="img" viewBox="0 0 120 120" aria-labelledby="crest-title">
-            <title id="crest-title">小黄大王日报徽章：皇冠与字母黄</title>
+            <title id="crest-title">小黄大王日报卡通皇冠徽章：中央写有黄字</title>
+            <defs>
+              <linearGradient id="crest-gold" x1="24" x2="96" y1="24" y2="96" gradientUnits="userSpaceOnUse">
+                <stop stop-color="#fff1a8"></stop>
+                <stop offset="0.48" stop-color="#d99a22"></stop>
+                <stop offset="1" stop-color="#fff6c8"></stop>
+              </linearGradient>
+            </defs>
             <circle cx="60" cy="60" r="54" fill="#fff8df" stroke="#1f1d1a" stroke-width="4"></circle>
-            <path d="M26 50l15-18 19 18 19-18 15 18v30H26z" fill="#d69e2e" stroke="#1f1d1a" stroke-width="4"></path>
-            <text x="60" y="76" text-anchor="middle" font-size="38" font-weight="900" fill="#1f1d1a">黄</text>
+            <circle cx="60" cy="60" r="45" fill="#fff2bf" stroke="#b7791f" stroke-width="2"></circle>
+            <path d="M27 50l13-18 15 18 15-20 15 20 13-18 8 47H19z" fill="url(#crest-gold)" stroke="#1f1d1a" stroke-linejoin="round" stroke-width="4"></path>
+            <circle cx="40" cy="32" r="5" fill="#9b2226" stroke="#1f1d1a" stroke-width="2"></circle>
+            <circle cx="60" cy="30" r="5" fill="#0f766e" stroke="#1f1d1a" stroke-width="2"></circle>
+            <circle cx="80" cy="32" r="5" fill="#9b2226" stroke="#1f1d1a" stroke-width="2"></circle>
+            <path d="M31 78h58" stroke="#fff8df" stroke-linecap="round" stroke-width="5"></path>
+            <text x="60" y="72" text-anchor="middle" font-size="36" font-weight="900" fill="#1f1d1a">黄</text>
           </svg>
           <div>
             <h1>小黄大王日报</h1>
             <p class="tagline">凡小黄所到之处，皆为头版头条。</p>
           </div>
           <svg class="crest" aria-hidden="true" viewBox="0 0 120 120">
+            <defs>
+              <linearGradient id="crest-gold-right" x1="24" x2="96" y1="24" y2="96" gradientUnits="userSpaceOnUse">
+                <stop stop-color="#fff1a8"></stop>
+                <stop offset="0.48" stop-color="#d99a22"></stop>
+                <stop offset="1" stop-color="#fff6c8"></stop>
+              </linearGradient>
+            </defs>
             <circle cx="60" cy="60" r="54" fill="#fff8df" stroke="#1f1d1a" stroke-width="4"></circle>
-            <path d="M26 50l15-18 19 18 19-18 15 18v30H26z" fill="#d69e2e" stroke="#1f1d1a" stroke-width="4"></path>
-            <text x="60" y="76" text-anchor="middle" font-size="38" font-weight="900" fill="#1f1d1a">黄</text>
+            <circle cx="60" cy="60" r="45" fill="#fff2bf" stroke="#b7791f" stroke-width="2"></circle>
+            <path d="M27 50l13-18 15 18 15-20 15 20 13-18 8 47H19z" fill="url(#crest-gold-right)" stroke="#1f1d1a" stroke-linejoin="round" stroke-width="4"></path>
+            <circle cx="40" cy="32" r="5" fill="#9b2226" stroke="#1f1d1a" stroke-width="2"></circle>
+            <circle cx="60" cy="30" r="5" fill="#0f766e" stroke="#1f1d1a" stroke-width="2"></circle>
+            <circle cx="80" cy="32" r="5" fill="#9b2226" stroke="#1f1d1a" stroke-width="2"></circle>
+            <path d="M31 78h58" stroke="#fff8df" stroke-linecap="round" stroke-width="5"></path>
+            <text x="60" y="72" text-anchor="middle" font-size="36" font-weight="900" fill="#1f1d1a">黄</text>
           </svg>
         </div>
 
@@ -581,9 +784,7 @@
             <p class="byline">本报记者：皇家八卦观察组 · 发自客厅核心区</p>
 
             <div class="portrait-panel">
-              <div class="portrait" role="img" aria-label="写有小黄大王四字的金色头版画像占位图">
-                <span>小黄 大王</span>
-              </div>
+              <div class="portrait" role="img" aria-label="小黄大王身着黄袍的卡通画像"></div>
               <blockquote class="quote">
                 “经本报严肃研判，小黄大王随手拿起一杯水，也足以构成年度公共事件。”
               </blockquote>
@@ -699,6 +900,7 @@
               <li><strong>16:20</strong> 大王发出可爱表情，舆论场短暂沸腾。</li>
               <li><strong>21:00</strong> 大王准备休息，臣民自觉降低音量。</li>
             </ol>
+            <button class="summon-button" type="button" data-open-audience>预约拜见小黄大王</button>
           </article>
         </section>
 
@@ -721,5 +923,96 @@
         <p>&copy; 2026 小黄大王日报社版权所有 · 京黄备 5201314 号 · 本报编辑部</p>
       </footer>
     </div>
+
+    <dialog id="audience-dialog" aria-labelledby="audience-title">
+      <form id="audience-form" method="dialog">
+        <div class="modal-head">
+          <div>
+            <span class="label">御前登记处</span>
+            <h2 id="audience-title">预约拜见小黄大王</h2>
+          </div>
+          <button class="close-button" type="button" aria-label="关闭预约登记" data-close-audience>×</button>
+        </div>
+
+        <div class="modal-body">
+          <div class="field">
+            <label for="petitioner-name">姓名</label>
+            <input id="petitioner-name" name="petitioner-name" autocomplete="name" required>
+          </div>
+
+          <div class="field">
+            <label for="bestowed-rank">小黄大王所赐身份</label>
+            <select id="bestowed-rank" name="bestowed-rank" required>
+              <option value="">请选择御赐官阶</option>
+              <option>御前首席夸夸大学士</option>
+              <option>尚食局奶茶总管</option>
+              <option>殿前开心侍读</option>
+              <option>起居注温柔史官</option>
+              <option>翰林院表情包编修</option>
+              <option>内务府拖鞋巡抚</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label for="audience-time">预约时间</label>
+            <input id="audience-time" name="audience-time" type="datetime-local" required>
+          </div>
+
+          <div class="field">
+            <label for="memorial-text">奏请内容</label>
+            <div class="memorial-frame">
+              <p class="fixed-text">启奏小黄大王：臣闻圣颜一展，万物生辉。今谨具短笺，伏愿大王垂览：</p>
+              <textarea
+                id="memorial-text"
+                name="memorial-text"
+                required
+                placeholder="在此填写你想对小黄大王说的话"
+              ></textarea>
+              <p class="fixed-text"><span id="memorial-signoff">谨此奏闻，伏候圣裁。臣某某叩首敬上。</span></p>
+            </div>
+          </div>
+
+          <p class="confirmation" id="audience-confirmation" hidden>登记已呈递御前，静候小黄大王朱批。</p>
+        </div>
+
+        <div class="modal-actions">
+          <button class="secondary-button" type="button" data-close-audience>稍后再奏</button>
+          <button class="primary-button" type="submit">呈递预约</button>
+        </div>
+      </form>
+    </dialog>
+
+    <script>
+      const audienceDialog = document.getElementById("audience-dialog");
+      const audienceForm = document.getElementById("audience-form");
+      const petitionerName = document.getElementById("petitioner-name");
+      const signoff = document.getElementById("memorial-signoff");
+      const confirmation = document.getElementById("audience-confirmation");
+
+      function updateSignoff() {
+        const name = petitionerName.value.trim() || "某某";
+        signoff.textContent = `谨此奏闻，伏候圣裁。臣${name}叩首敬上。`;
+      }
+
+      document.querySelector("[data-open-audience]").addEventListener("click", () => {
+        confirmation.hidden = true;
+        updateSignoff();
+        audienceDialog.showModal();
+        petitionerName.focus();
+      });
+
+      document.querySelectorAll("[data-close-audience]").forEach((button) => {
+        button.addEventListener("click", () => audienceDialog.close());
+      });
+
+      petitionerName.addEventListener("input", updateSignoff);
+
+      audienceForm.addEventListener("submit", (event) => {
+        event.preventDefault();
+        if (!audienceForm.reportValidity()) return;
+        updateSignoff();
+        confirmation.hidden = false;
+      });
+    </script>
   </body>
 </html>
